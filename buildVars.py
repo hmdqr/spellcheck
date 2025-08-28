@@ -32,7 +32,7 @@ addon_info = {
 	# Translators: Long description to be shown for this add-on on add-on information from add-ons manager
 	"addon_description": _("A multilingual spellchecker. Detects spelling mistakes in current selection and provide correction suggestions."),
 	# version
-	"addon_version": "v1.3",
+	"addon_version": "1.3.1",
 	# Author(s)
 	"addon_author": "Fawaz Abdulrahman<fawaz.ar94@gmail.com> & Musharraf Omer<ibnomer2011@hotmail.com>",
 	# URL for the add-on documentation support
