@@ -2,7 +2,7 @@
 
 - Yazarlar: Fawaz Abdulrahman <fawaz.ar94@gmail.com> ve  
 - Musharraf Omer <ibnomer2011@hotmail.com>  
-- Sürüm: 1.3
+- Sürüm: 1.4
 - Sürümler: https://github.com/hmdqr/spellcheck/releases  
 
 Not (resmî olmayan çatallanma/bakım): Bu depo, eklentiyi modern NVDA’da çalıştırmak amacıyla hmdqr tarafından bakımı yapılan resmî olmayan bir fork’tur. Resmî depo: https://github.com/blindpandas/spellcheck. hmdqr tarafından özgün kod yazımı yoktur; yalnızca uyumluluk, paketleme ve belgeler GitHub Copilot yardımıyla güncellendi.

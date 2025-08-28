@@ -1,7 +1,7 @@
 # معلومات
 
 - المطورون: فواز عبد الرحمن <fawaz.ar94@gmail.com> & مشرف عمر <ibnomer2011@hotmail.com>
-- رقم الإصدار: 1.3
+- رقم الإصدار: 1.4
 - صفحة الإصدارات: https://github.com/hmdqr/spellcheck/releases
 
 ملاحظة (تفرّع غير رسمي/صيانة): هذا المستودع هو fork غير رسمي بهدف تشغيل الإضافة على NVDA حديث. المستودع الرسمي: https://github.com/blindpandas/spellcheck. لا توجد كتابة شِفرات أصلية من قِبل hmdqr؛ التعديلات تقتصر على التوافق والتغليف والوثائق بمساعدة GitHub Copilot.

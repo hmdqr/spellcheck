@@ -1,7 +1,7 @@
 # اطلاعات
 
 - نویسندگان: Fawaz Abdulrahman<fawaz.ar94@gmail.com> و Musharraf Omer<ibnomer2011@hotmail.com>
-- نگارش: 1.3
+- نگارش: 1.4
 - صفحهٔ انتشارها: https://github.com/hmdqr/spellcheck/releases
 
 یادداشت (انشعاب غیررسمی/نگه‌داری): این مخزن یک fork غیررسمی است برای اجرای افزونه روی NVDAهای جدید. مخزن رسمی: https://github.com/blindpandas/spellcheck. هیچ کُدِ اصلی توسط hmdqr نوشته نشده است؛ صرفاً سازگارسازی، بَستِه‌بندی و مستندسازی با کمک GitHub Copilot انجام شده است.

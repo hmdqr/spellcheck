@@ -1,7 +1,7 @@
 # Information
 
 - authors: Fawaz Abdulrahman <fawaz.ar94@gmail.com> & Musharraf Omer <ibnomer2011@hotmail.com>
-- version: 1.3
+- version: 1.4
 - releases: https://github.com/hmdqr/spellcheck/releases
 
 Note (fork/maintenance): Unofficial fork maintained by hmdqr to run the original add-on on modern NVDA. Official repository: https://github.com/blindpandas/spellcheck. No original code authored by hmdqr; maintenance-only changes were applied with help from GitHub Copilot (compatibility, packaging, docs). Key updates include Python 3.12/NVDA 2025 support, safer bundled-libs loading, optional i18n at build time, exact-selection whitespace preservation, a new spelling gesture (Ctrl+Shift+P), and refreshed docs.
