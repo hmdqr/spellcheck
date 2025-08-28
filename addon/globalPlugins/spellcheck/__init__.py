@@ -278,7 +278,8 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
         text = ""
         with suppress(RuntimeError, NotImplementedError):
             info = obj.makeTextInfo(textInfos.POSITION_SELECTION)
-            text = info.text.strip()
+            # Do not strip whitespace; users expect exact selection including newlines/spaces.
+            text = info.text
         if not text:
             # translators: the message is announced when there is no text is selected.
             queueHandler.queueFunction(

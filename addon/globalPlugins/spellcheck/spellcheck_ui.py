@@ -300,6 +300,19 @@ class MisspellingMenuItemObject(MenuItemObject):
         self.script_downarrow(gesture)
 
     @script(
+        gesture="kb:control+shift+p",
+        # translators: appears in the NVDA input help.
+        description=_("Spell the currently focused suggestion or misspelling, character by character"),
+        category=SCRCAT__SPELLCHECK,
+    )
+    def script_spell_current_item(self, gesture):
+        """Spell the current item name (misspelling or accepted suggestion)."""
+        item = self
+        # If focus is on a suggestion menu child, its own handler will trigger; here we just spell our name.
+        speech.speakSpelling(item.name)
+        tones.beep(880, 30)
+
+    @script(
         gesture="kb:control+c",
         # translators: appears in the NVDA input help.
         description=_("Copies the corrected text to the clipboard"),
@@ -340,6 +353,16 @@ class SuggestionMenuItemObject(MenuItemObject):
     @script(gesture="kb:enter")
     def script_accept_suggestion(self, gesture):
         self.acceptance_callback(self)
+
+    @script(
+        gesture="kb:control+shift+p",
+        # translators: appears in the NVDA input help.
+        description=_("Spell the current suggestion, character by character"),
+        category=SCRCAT__SPELLCHECK,
+    )
+    def script_spell_suggestion(self, gesture):
+        speech.speakSpelling(self.name)
+        tones.beep(880, 30)
 
 
 class MenuObject(KeyboardNavigableNVDAObjectMixin, ItemContainerMixin, NVDAObject):

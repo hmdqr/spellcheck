@@ -17,11 +17,15 @@ SOUNDS_DIRECTORY = os.path.join(PLUGIN_DIRECTORY, "sounds")
 
 @contextlib.contextmanager
 def import_bundled_library():
-    sys.path.insert(0, LIBS_DIRECTORY)
+    # Append (not prepend) to avoid shadowing stdlib modules on newer Python/NVDA.
+    # This ensures we still find third-party packages (e.g., enchant, httpx)
+    # without accidentally overriding standard library modules such as asyncio.
+    sys.path.append(LIBS_DIRECTORY)
     try:
         yield
     finally:
-        sys.path.remove(LIBS_DIRECTORY)
+        with contextlib.suppress(ValueError):
+            sys.path.remove(LIBS_DIRECTORY)
 
 
 def play_sound(name):

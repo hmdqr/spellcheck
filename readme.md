@@ -1,8 +1,10 @@
 # Information
 
-- authors: Fawaz Abdulrahman<fawaz.ar94@gmail.com> & Musharraf Omer<ibnomer2011@hotmail.com>
-- version: 1.1
-- [download](https://github.com/blindpandas/spellcheck/releases/download/v1.1/spellcheck-1.1.nvda-addon)
+- authors: Fawaz Abdulrahman <fawaz.ar94@gmail.com> & Musharraf Omer <ibnomer2011@hotmail.com>
+- version: 1.3
+- releases: https://github.com/hmdqr/spellcheck/releases
+
+Note (fork/maintenance): Unofficial fork maintained by hmdqr to run the original add-on on modern NVDA. Official repository: https://github.com/blindpandas/spellcheck. No original code authored by hmdqr; maintenance-only changes were applied with help from GitHub Copilot (compatibility, packaging, docs). Key updates include Python 3.12/NVDA 2025 support, safer bundled-libs loading, optional i18n at build time, exact-selection whitespace preservation, a new spelling gesture (Ctrl+Shift+P), and refreshed docs.
 
 ## functionality
 
@@ -11,7 +13,7 @@ the purpose of the addon is to find and correct the spelling errors quickly in a
 
 ## usage
 
-- select some text using the normal selection keys, such as Control + a for selecting all.
+- select some text using the normal selection keys, such as Control + A for selecting all.
 - press NVDA+Alt+s to invoke the addon interface.
 - the spellcheck will be done based on your current keyboard input.
 - alternatively, you can pick a language manually by pressing NVDA+ALT+SHIFT+L.
@@ -21,6 +23,7 @@ the purpose of the addon is to find and correct the spelling errors quickly in a
 - while navigating among the errors with right and left arrows, you can press backspace to remove a chosen suggestion.
 - when done, press Control + r to replace the chosen suggestions in the selected text.
 - in addition to replacing the words, control+r also adds the word to the personal dictionary if you had picked that option.
+ - tip: press Ctrl+Shift+P to spell the currently focused misspelling or suggestion, character by character.
 
 ### personal dictionary
 
@@ -60,5 +63,8 @@ Additionally, you can press NVDA+ALT+SHIFT+L to bring up a list of languages whe
 - backspace to remove a chosen suggestion.
 - control + c to copy the corrected text to the clipboard without replacing the selected text.
 - control + r to replace the selected suggestions in the text field. (Can be changed from input gestures).
+- control + shift + p to spell the currently focused misspelling or suggestion character by character. (Can be changed from input gestures).
 - escape to close both the suggestions menu and misspelled words menu.
 - NVDA+Alt+SHIFT+L to select a language manually (can be changed from input gestures).
+
+Credits: Original authors Fawaz Abdulrahman and Musharraf Omer. Fork maintenance by hmdqr with GitHub Copilot.

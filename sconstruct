@@ -9,6 +9,7 @@ import os
 import os.path
 import zipfile
 import sys
+import shutil
 
 # While names imported below are available by default in every SConscript
 # Linters aren't aware about them.
@@ -82,6 +83,10 @@ vars.Add("channel", "Update channel for this build", buildVars.addon_info["addon
 
 env = Environment(variables=vars, ENV=os.environ, tools=['gettexttool', mdTool])
 env.Append(**buildVars.addon_info)
+
+# Detect availability of external gettext tools (msgfmt/xgettext).
+# On many Windows setups these are not installed; in that case, skip i18n build steps.
+HAVE_GETTEXT_TOOLS = shutil.which("msgfmt") is not None and shutil.which("xgettext") is not None
 
 if env["dev"]:
 	import datetime
@@ -187,17 +192,22 @@ addon = env.NVDAAddon(addonFile, env.Dir('addon'))
 
 langDirs = [f for f in env.Glob(os.path.join("addon", "locale", "*"))]
 
-# Allow all NVDA's gettext po files to be compiled in source/locale, and manifest files to be generated
-for dir in langDirs:
-	poFile = dir.File(os.path.join("LC_MESSAGES", "nvda.po"))
-	moFile = env.gettextMoFile(poFile)
-	env.Depends(moFile, poFile)
-	translatedManifest = env.NVDATranslatedManifest(
-		dir.File("manifest.ini"),
-		[moFile, os.path.join("manifest-translated.ini.tpl")]
-	)
-	env.Depends(translatedManifest, ["buildVars.py"])
-	env.Depends(addon, [translatedManifest, moFile])
+if HAVE_GETTEXT_TOOLS:
+	# Allow all NVDA's gettext po files to be compiled in source/locale, and manifest files to be generated
+	for dir in langDirs:
+		poFile = dir.File(os.path.join("LC_MESSAGES", "nvda.po"))
+		moFile = env.gettextMoFile(poFile)
+		env.Depends(moFile, poFile)
+		translatedManifest = env.NVDATranslatedManifest(
+			dir.File("manifest.ini"),
+			[moFile, os.path.join("manifest-translated.ini.tpl")]
+		)
+		env.Depends(translatedManifest, ["buildVars.py"])
+		env.Depends(addon, [translatedManifest, moFile])
+else:
+	# Without gettext tools, skip compiling translations and translated manifests.
+	# The add-on will still build with English resources.
+	print("[SCons] gettext tools not found (msgfmt/xgettext). Skipping translation build steps.")
 
 pythonFiles = expandGlobs(buildVars.pythonSources)
 for file in pythonFiles:
@@ -211,20 +221,21 @@ for mdFile in env.Glob(os.path.join('addon', 'doc', '*', '*.md')):
 	env.Depends(htmlFile, mdFile)
 	env.Depends(addon, htmlFile)
 
-# Pot target
-i18nFiles = expandGlobs(buildVars.i18nSources)
-gettextvars = {
-	'gettext_package_bugs_address': 'nvda-translations@groups.io',
-	'gettext_package_name': buildVars.addon_info['addon_name'],
-	'gettext_package_version': buildVars.addon_info['addon_version']
-}
+if HAVE_GETTEXT_TOOLS:
+	# Pot target
+	i18nFiles = expandGlobs(buildVars.i18nSources)
+	gettextvars = {
+		'gettext_package_bugs_address': 'nvda-translations@groups.io',
+		'gettext_package_name': buildVars.addon_info['addon_name'],
+		'gettext_package_version': buildVars.addon_info['addon_version']
+	}
 
-pot = env.gettextPotFile("${addon_name}.pot", i18nFiles, **gettextvars)
-env.Alias('pot', pot)
-env.Depends(pot, i18nFiles)
-mergePot = env.gettextMergePotFile("${addon_name}-merge.pot", i18nFiles, **gettextvars)
-env.Alias('mergePot', mergePot)
-env.Depends(mergePot, i18nFiles)
+	pot = env.gettextPotFile("${addon_name}.pot", i18nFiles, **gettextvars)
+	env.Alias('pot', pot)
+	env.Depends(pot, i18nFiles)
+	mergePot = env.gettextMergePotFile("${addon_name}-merge.pot", i18nFiles, **gettextvars)
+	env.Alias('mergePot', mergePot)
+	env.Depends(mergePot, i18nFiles)
 
 # Generate Manifest path
 manifest = env.NVDAManifest(os.path.join("addon", "manifest.ini"), os.path.join("manifest.ini.tpl"))

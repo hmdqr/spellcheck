@@ -1,9 +1,11 @@
-# Yazım Denetimi  
+# Yazım Denetimi
 
-- yazarlar: Fawaz Abdulrahman<fawaz.ar94@gmail.com> ve  
-- Musharraf Omer<ibnomer2011@hotmail.com>  
-- sürüm: 1.1
-- İndir: [Kararlı Sürüm:][1]  
+- Yazarlar: Fawaz Abdulrahman <fawaz.ar94@gmail.com> ve  
+- Musharraf Omer <ibnomer2011@hotmail.com>  
+- Sürüm: 1.3
+- Sürümler: https://github.com/hmdqr/spellcheck/releases  
+
+Not (resmî olmayan çatallanma/bakım): Bu depo, eklentiyi modern NVDA’da çalıştırmak amacıyla hmdqr tarafından bakımı yapılan resmî olmayan bir fork’tur. Resmî depo: https://github.com/blindpandas/spellcheck. hmdqr tarafından özgün kod yazımı yoktur; yalnızca uyumluluk, paketleme ve belgeler GitHub Copilot yardımıyla güncellendi.
 
 ## Hakkında:  
 
@@ -13,14 +15,15 @@ Ayrıca, Sözlükte bulunmayan kelimeleri ekleyebileceğiniz kişisel bir kelime
 ## Kullanım:  
 
 - Denetlemek istediğiniz metnin tümünü CTRL+A ile seçmeli veya dilediğiniz bir kısmını diğer seçme yöntemleri ile seçmelisiniz.  
-- Eklenti arayüzünü çağırmak için NVDA+Alt+s tuşlarına basın.  
+- Eklenti arayüzünü çağırmak için NVDA+Alt+S tuşlarına basın.  
 - Yazım denetimi varsayılan yazma dilinize göre yapılacaktır.  
 - Alternatif olarak, NVDA+ALT+SHIFT+L tuşlarına basarak açılacak listeden dilediğiniz dili seçebilirsiniz.  
 - hata yoksa yazım hatası olmadığını belirten bir mesaj duyurusu yapılır.  
 - hata olması durumunda, yanlış yazılan kelimeler arasında gezinmek için sağ ve sol yön tuşlarını, Öneri listesini açmak için Enter veya aşağı yön tuşunu kullanın.  
-- Öneri listesinde Aşağı ve yukarı yön tuşları ile gezebilir, dilediğiniz öneriyi seçtikten sonra Enter tuşu ile ilgili öneriyi uygulayabilirsiniz. Sağ ve Sol yön tuşları ile hatalı kelimeler arasında gezinirken, NVDA öneri listesinden seçtiğimiz kelimeyi de seslendirecektir.  
+- Öneri listesinde Aşağı ve yukarı yön tuşları ile gezebilir, dilediğiniz öneriyi seçtikten sonra Enter tuşu ile ilgili öneriyi uygulayabilirsiniz. Sağ ve Sol yön tuşları ile hatalı kelimeler arasında gezinirken, NVDA öneri listesinden seçtiğiniz kelimeyi de seslendirecektir.  
+ - İpucu: Odaktaki yanlış yazım/öneriyi harf harf okumak için Control+Shift+P tuşlarına basın.
 - Sağ ve sol yön tuşları ile hatalar arasında gezinirken, seçilen bir öneriyi kaldırmak için Geri Silme(Back Space) tuşuna basabilirsiniz.  
-- Bittiğinde, vurgulanan metinde seçilen önerileri değiştirmek için Control + r tuşlarına basın.  
+- Bittiğinde, vurgulanan metinde seçilen önerileri değiştirmek için Control+R tuşlarına basın.  
 - Control+r, sözcükleri değiştirmeye ek olarak, bu seçeneği işaretlediyseniz sözcüğü kişisel sözlüğe de ekler.  
 
 ### kişisel sözlük:
@@ -45,14 +48,14 @@ Evet'e tıkladığınızda, sözlük yüklenecek ve varsayılan klavye dilinde d
 Ek olarak, bir dili manuel olarak seçebileceğiniz ve daha önce indirilmemişse sözlüğü indirebileceğiniz veya o dilde yazım denetimi yapabileceğiniz dillerin listesini getirmek için NVDA+ALT+SHIFT+L tuşlarına basabilirsiniz.  
 Varsayılan klavye diline dönmek için aynı kısa yol tuşlarına tekrar basabilirsiniz.  
 
-## notlar
+## Notlar
 
 - Escape tuşuna basarsanız, yapılan deyişiklikler kaydedilmeden pencereden çıkılacaktır.  
-- Herhangi bir metni değiştirmeden sadece kişisel sözlüğe kelime eklemek isteseniz bile, bu kelimelerin kişisel sözlüğe eklenmesi için control+r tuşlarına basmanız gerekir.  
+- Herhangi bir metni değiştirmeden sadece kişisel sözlüğe kelime eklemek isteseniz bile, bu kelimelerin kişisel sözlüğe eklenmesi için Control+R tuşlarına basmanız gerekir.  
 - Yazım denetleme kısa yolu olan (NVDA+alt+s), Kaydetme kısayol tuşu (kontrol+r) ve manuel dil seçim kısayol tuşu olan (NVDA+Alt+SHIFT+L) seçeneklerini Girdi hreketleri iletişim kutusundan değiştirebilirsiniz.  
 
 
-## klavye kısayolları:
+## Klavye kısayolları
 
 - NVDA+alt+s: Eklentiyi etkinleştirir. (Giriş hareketlerinden değiştirilebilir).  
 -Sağ ve Sol yön tuşları: Bulunan Yazım hataları arasında dolaşmamızı sağlar.  
@@ -60,9 +63,10 @@ Varsayılan klavye diline dönmek için aynı kısa yol tuşlarına tekrar basab
 - Yukarı ve aşağı yön tuşu: öneriler arasında gezinmemizi sağlar.  
 - enter: üzerinde bulunan öneriyi seçer.  
 - backspace: Seçilen bir öneriyi kaldırır.
-- Ctrl + c: düzeltilmiş metni seçili metni değiştirmeden panoya kopyalamak için. (Giriş hareketlerinden değiştirilebilir).  
-- control + r: metin alanında seçilen önerileri değiştirmek için  kullanılır. (Giriş hareketlerinden değiştirilebilir).  
+- Ctrl+C: düzeltilmiş metni seçili metni değiştirmeden panoya kopyalamak için. (Giriş hareketlerinden değiştirilebilir).  
+- Control+R: metin alanında seçilen önerileri değiştirmek için kullanılır. (Giriş hareketlerinden değiştirilebilir).  
+- Control+Shift+P: odaktaki yanlış yazım veya öneriyi harf harf okur. (Giriş hareketlerinden değiştirilebilir).  
 - Escape: Hem öneriler menüsünü hem de yanlış yazılmış sözcükler menüsünü kapatır.  
 - NVDA+Alt+SHIFT+L: Farklı diller seçebileceğimiz bir liste açar. (giriş hareketlerinden değiştirilebilir).  
 
-[1]: https://github.com/blindpandas/spellcheck/releases/download/v1.1/spellcheck-1.1.nvda-addon
+  
