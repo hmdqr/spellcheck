@@ -1,0 +1,37 @@
+name: Build and Release NVDA Add-on
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-release:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install build dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install scons markdown
+
+      - name: Build add-on
+        shell: bash
+        run: |
+          scons -Q
+          ls -l *.nvda-addon
+
+      - name: Create GitHub Release and upload asset
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            *.nvda-addon
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
