@@ -1,7 +1,7 @@
 @echo off
 setlocal ENABLEDELAYEDEXPANSION
 
-REM Usage: release.cmd 1.3.1 [--skip-build]
+REM Usage: release.bat 1.3.1 [--skip-build]
 if "%~1"=="" (
   echo Usage: %~nx0 VERSION [--skip-build]
   echo Example: %~nx0 1.3.1
@@ -57,18 +57,38 @@ if not exist ".github\workflows\release.yml" (
 REM Check if tag already exists locally or on origin
 git rev-parse -q --verify refs/tags/%TAG% >nul 2>&1
 if not errorlevel 1 (
-  echo ERROR: Tag %TAG% already exists locally. Choose a new version or delete the tag first.
-  exit /b 1
+  echo WARNING: Tag %TAG% already exists locally.
+  set /p DELLOCAL=Delete local tag %TAG% and continue? [y/N]: 
+  if /I "!DELLOCAL!"=="Y" (
+    git tag -d %TAG%
+    if errorlevel 1 (
+      echo Failed to delete local tag %TAG%.
+      exit /b 1
+    )
+  ) else (
+    echo Aborting by user choice.
+    exit /b 1
+  )
 )
 set FOUND_TAG=
 for /f "delims=" %%i in ('git ls-remote --tags origin %TAG%') do set FOUND_TAG=1
 if defined FOUND_TAG (
-  echo ERROR: Tag %TAG% already exists on origin. Choose a new version.
-  exit /b 1
+  echo WARNING: Tag %TAG% already exists on origin.
+  set /p DELREMOTE=Delete remote tag %TAG% on origin and continue? [y/N]: 
+  if /I "!DELREMOTE!"=="Y" (
+    git push origin :refs/tags/%TAG%
+    if errorlevel 1 (
+      echo Failed to delete remote tag %TAG% on origin.
+      exit /b 1
+    )
+  ) else (
+    echo Aborting by user choice.
+    exit /b 1
+  )
 )
 
 echo === Step 1/5: Bump version in buildVars.py to %CLEAN_VER% ===
-python -c "import sys, re, pathlib; p=pathlib.Path('buildVars.py'); t=p.read_text(encoding='utf-8'); t=re.sub(r'(\"addon_version\"\s*:\s*\")(.*?)(\")', rf'\1{sys.argv[1]}\3', t); p.write_text(t, encoding='utf-8')" %CLEAN_VER%
+python -c "import sys,re,pathlib; p=pathlib.Path('buildVars.py'); t=p.read_text(encoding='utf-8'); pat=r'(\"addon_version\"\s*:\s*\")(.*?)(\")'; new=re.sub(pat, lambda m: m.group(1)+sys.argv[1]+m.group(3), t); p.write_text(new, encoding='utf-8')" %CLEAN_VER%
 if errorlevel 1 (
   echo Failed to bump version. Ensure Python is installed and accessible.
   exit /b 1
