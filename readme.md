@@ -1,7 +1,7 @@
 # Information
 
 - authors: Fawaz Abdulrahman <fawaz.ar94@gmail.com> & Musharraf Omer <ibnomer2011@hotmail.com>
-- version: 1.4
+- version: 1.5
 - releases: https://github.com/hmdqr/spellcheck/releases
 
 Note: Unofficial fork maintained by hmdqr. For releases, use the link above.
@@ -58,7 +58,6 @@ Open from Tools → Spellcheck settings or press NVDA+Alt+Shift+S.
 	- See a simple status for each language (e.g. “Installed — Up to date — 7.0 MB”).
 	- Update checks run in the background; the UI stays responsive.
 
-
 ## notes
 
 - closing the addon interface with the escape key will discard all the changes; nothing will be saved.
@@ -84,3 +83,25 @@ Open from Tools → Spellcheck settings or press NVDA+Alt+Shift+S.
 <!-- Developer build instructions removed to keep this README user-focused. -->
 
 Credits: Original authors Fawaz Abdulrahman and Musharraf Omer. Fork maintenance by hmdqr with GitHub Copilot.
+
+## Components used and dictionary source
+
+- NVDA (NV Access): the add-on runs inside NVDA and uses its plugin APIs.
+- UI: wxPython (via NVDA UI framework).
+- Spell engine: Enchant (PyEnchant) using Hunspell back-end.
+- Dictionaries: Hunspell dictionaries from LibreOffice “dictionaries” repository.
+	- Source: https://github.com/LibreOffice/dictionaries
+	- Files used: pairs of .dic and .aff per language (for example: en_US.dic and en_US.aff).
+	- Licensing: varies by language; see the license files in the upstream repository for details.
+- Networking: httpx (to fetch dictionary metadata and files).
+- Build system: SCons (NVDA add-on build).
+
+### Manual dictionary installation
+
+If you prefer to install a dictionary manually:
+
+1) Download the matching .dic and .aff files for your language from the LibreOffice repository above.
+2) Copy both files into the NVDA user configuration folder under:
+	 - Installed NVDA: %APPDATA%\nvda\spellcheck_dictionaries\hunspell\
+	 - Portable NVDA: userConfig\spellcheck_dictionaries\hunspell\
+3) Restart NVDA. The language should appear as “Installed” in Spellcheck settings.

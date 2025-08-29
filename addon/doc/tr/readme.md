@@ -2,7 +2,7 @@
 
 - Yazarlar: Fawaz Abdulrahman <fawaz.ar94@gmail.com> ve  
 - Musharraf Omer <ibnomer2011@hotmail.com>  
-- Sürüm: 1.4
+- Sürüm: 1.5
 - Sürümler: https://github.com/hmdqr/spellcheck/releases  
 
 Not (resmî olmayan çatallanma/bakım): Bu depo, eklentiyi modern NVDA’da çalıştırmak amacıyla hmdqr tarafından bakımı yapılan resmî olmayan bir fork’tur. Resmî depo: https://github.com/blindpandas/spellcheck. hmdqr tarafından özgün kod yazımı yoktur; yalnızca uyumluluk, paketleme ve belgeler GitHub Copilot yardımıyla güncellendi.
@@ -83,5 +83,27 @@ Araçlar → Yazım Denetimi ayarları’ndan açın veya NVDA+Alt+Shift+S tuşl
 - Escape: Hem öneriler menüsünü hem de yanlış yazılmış sözcükler menüsünü kapatır.  
 - NVDA+Alt+SHIFT+L: Farklı diller seçebileceğimiz bir liste açar. (giriş hareketlerinden değiştirilebilir).  
 - NVDA+Alt+Shift+S: Yazım Denetimi ayarlarını açar (sözlük yönetimi).
+
+## Kullanılan bileşenler ve sözlük kaynağı
+
+- NVDA (NV Access): Eklenti NVDA içinde çalışır ve eklenti API’lerini kullanır.
+- Arayüz: wxPython (NVDA’nın UI çerçevesi üzerinden).
+- Yazım motoru: Enchant (PyEnchant) Hunspell arka ucuyla.
+- Sözlükler: LibreOffice “dictionaries” deposundaki Hunspell sözlükleri.
+	- Kaynak: https://github.com/LibreOffice/dictionaries
+	- Kullanılan dosyalar: Her dil için .dic ve .aff çifti (ör. en_US.dic ve en_US.aff).
+	- Lisans: Dile göre değişir; ayrıntılar için ilgili dil klasöründeki lisans dosyalarına bakın.
+- Ağ: httpx (sözlük meta verileri ve dosyalarını almak için).
+- Derleme sistemi: SCons (NVDA eklentisi derlemesi).
+
+### Sözlüğü elle kurma
+
+Elle bir sözlük kurmak isterseniz:
+
+1) İlgili dil için .dic ve .aff dosyalarını yukarıdaki depodan indirin.
+2) İki dosyayı da NVDA kullanıcı yapılandırma klasörüne kopyalayın:
+	 - Kurulu NVDA: %APPDATA%\nvda\spellcheck_dictionaries\hunspell\
+	 - Taşınabilir NVDA: userConfig\spellcheck_dictionaries\hunspell\
+3) NVDA’yı yeniden başlatın. Dil, Yazım Denetimi ayarlarında “Yüklü” olarak görünür.
 
   
