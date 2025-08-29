@@ -1,10 +1,11 @@
 # Information
 
-- authors: Fawaz Abdulrahman <fawaz.ar94@gmail.com> & Musharraf Omer <ibnomer2011@hotmail.com>
+- original authors: Fawaz Abdulrahman <fawaz.ar94@gmail.com> & Musharraf Omer <ibnomer2011@hotmail.com>
 - version: 1.5
-- releases: https://github.com/hmdqr/spellcheck/releases
+- official releases: https://github.com/blindpandas/spellcheck/releases
+- fork releases: https://github.com/hmdqr/spellcheck/releases
 
-Note: Unofficial fork maintained by hmdqr. For releases, use the link above.
+Note: Unofficial fork maintained by hmdqr. For official releases, use the blindpandas link above.
 
 ## functionality
 
@@ -80,9 +81,9 @@ Open from Tools → Spellcheck settings or press NVDA+Alt+Shift+S.
 - NVDA+Alt+SHIFT+L to select a language manually (can be changed from input gestures).
 - NVDA+Alt+Shift+S to open the Spellcheck settings dialog.
 
-<!-- Developer build instructions removed to keep this README user-focused. -->
+## Credits
 
-Credits: Original authors Fawaz Abdulrahman and Musharraf Omer. Fork maintenance by hmdqr with GitHub Copilot.
+Original authors Fawaz Abdulrahman and Musharraf Omer. Fork maintenance by hmdqr with GitHub Copilot.
 
 ## Components used and dictionary source
 
