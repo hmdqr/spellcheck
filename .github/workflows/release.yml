@@ -4,6 +4,10 @@ on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build-release:
@@ -23,14 +27,17 @@ jobs:
           pip install scons markdown
 
       - name: Build add-on
-        shell: bash
+        shell: cmd
         run: |
           scons -Q
-          ls -l *.nvda-addon
+          dir /b *.nvda-addon
 
-      - name: Create GitHub Release and upload asset
+    - name: Create GitHub Release and upload asset
         uses: softprops/action-gh-release@v2
         with:
+      tag_name: ${{ github.ref_name }}
+      generate_release_notes: true
+      make_latest: true
           files: |
             *.nvda-addon
         env:
