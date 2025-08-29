@@ -4,7 +4,7 @@
 - version: 1.4
 - releases: https://github.com/hmdqr/spellcheck/releases
 
-Note (fork/maintenance): Unofficial fork maintained by hmdqr to run the original add-on on modern NVDA. Official repository: https://github.com/blindpandas/spellcheck. No original code authored by hmdqr; maintenance-only changes were applied with help from GitHub Copilot (compatibility, packaging, docs). Key updates include Python 3.12/NVDA 2025 support, safer bundled-libs loading, optional i18n at build time, exact-selection whitespace preservation, a new spelling gesture (Ctrl+Shift+P), and refreshed docs.
+Note: Unofficial fork maintained by hmdqr. For releases, use the link above.
 
 ## functionality
 
@@ -17,6 +17,7 @@ the purpose of the addon is to find and correct the spelling errors quickly in a
 - press NVDA+Alt+s to invoke the addon interface.
 - the spellcheck will be done based on your current keyboard input.
 - alternatively, you can pick a language manually by pressing NVDA+ALT+SHIFT+L.
+- to open Settings for managing dictionaries, press NVDA+Alt+Shift+S or use Tools → Spellcheck settings.
 - if there are no errors, a message will be announced indicating that there are no spelling mistakes.
 - in case there are errors, use right and left arrows to navigate among the misspelled words, and enter or down arrow to bring up the suggestion menu. 
 - navigate among the suggestions with up and down arrow, then enter to pick a suggestion. The NVDA will announce the chosen suggestion for each error while navigating among them with left and right arrows. 
@@ -45,6 +46,18 @@ The addon comes with the English dictionary by default, which will be installed 
 The spell check will be done depending on the keyboard input language. However, if the dictionary hasn't been installed previously, NVDA will prompt you to install the dictionary of that language. Once you click yes, the dictionary will be installed, and you can spellcheck in that language now on.
 Additionally, you can press NVDA+ALT+SHIFT+L to bring up a list of languages where you can select a language manually and download the dictionary if it hasn't been downloaded previously or perform spell check in that language. press the same shortcut once more to return to the previous method, which is checking based on the keyboard input.
 
+### Dictionary management (Settings)
+
+Open from Tools → Spellcheck settings or press NVDA+Alt+Shift+S.
+
+- What you can do:
+	- Install missing dictionaries.
+	- Update installed ones when an update is available.
+	- Delete installed dictionaries you no longer need.
+	- Filter the list to show All, Installed, Not installed, or Has updates.
+	- See a simple status for each language (e.g. “Installed — Up to date — 7.0 MB”).
+	- Update checks run in the background; the UI stays responsive.
+
 
 ## notes
 
@@ -66,5 +79,8 @@ Additionally, you can press NVDA+ALT+SHIFT+L to bring up a list of languages whe
 - control + shift + p to spell the currently focused misspelling or suggestion character by character. (Can be changed from input gestures).
 - escape to close both the suggestions menu and misspelled words menu.
 - NVDA+Alt+SHIFT+L to select a language manually (can be changed from input gestures).
+- NVDA+Alt+Shift+S to open the Spellcheck settings dialog.
+
+<!-- Developer build instructions removed to keep this README user-focused. -->
 
 Credits: Original authors Fawaz Abdulrahman and Musharraf Omer. Fork maintenance by hmdqr with GitHub Copilot.

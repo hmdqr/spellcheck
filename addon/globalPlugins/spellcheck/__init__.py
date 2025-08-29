@@ -1,13 +1,6 @@
-# coding: utf-8
-
-# Copyright (c) 2021 Blind Pandas Team
-# This file is covered by the GNU General Public License.
-
 """
-  Spellcheck
-  ~~~~~~~~~~~~~~~~~~~~~~
-
-  The development of this addon is happening on GitHub <https://github.com/blindpandas/spellcheck>
+Spellcheck global plugin entry point and scripts.
+The UI (dialogs/downloader) is in settings_dialog.py to keep things tidy.
 """
 
 import tones
@@ -15,7 +8,6 @@ import wx
 import api
 import gui
 import ui
-import controlTypes
 import globalVars
 import globalPluginHandler
 import queueHandler
@@ -27,106 +19,28 @@ import NVDAObjects.behaviors
 from contextlib import suppress
 from scriptHandler import script
 from logHandler import log
+
 from .helpers import play_sound
+from .spellcheck_ui import SpellCheckMenu, SCRCAT__SPELLCHECK
 from .language_dictionary import (
     set_enchant_language_dictionaries_directory,
     get_all_possible_languages,
     get_enchant_language_dictionary,
-    download_language_dictionary,
     LanguageDictionaryNotAvailable,
     LanguageDictionaryDownloadable,
     MultipleDownloadableLanguagesFound,
 )
-from .spellcheck_ui import SpellCheckMenu, SCRCAT__SPELLCHECK
-
+from .settings_dialog import SpellcheckSettingsDialog, LanguageChoiceDialog, LanguageDictionaryDownloader
 
 import addonHandler
-
 addonHandler.initTranslation()
 
-
-class LanguageChoiceDialog(wx.SingleChoiceDialog):
-    def __init__(self, language_tags, *args, **kwargs):
-        self.language_tags = tuple(sorted(language_tags))
-        choices = [
-            languageHandler.getLanguageDescription(l) for l in self.language_tags
-        ]
-        kwargs["choices"] = choices
-        super().__init__(*args, **kwargs)
-
-    def ShowModal(self):
-        globalVars.LANGUAGE_DIALOG_SHOWN = True
-        retval = super().ShowModal()
-        globalVars.LANGUAGE_DIALOG_SHOWN = False
-        if retval == wx.ID_OK:
-            return self.language_tags[self.GetSelection()]
-
-
-class LanguageDictionaryDownloader:
-    def __init__(self, language_tag, ask_user=True):
-        self.language_tag = language_tag
-        self.ask_user = ask_user
-        self.language_description = languageHandler.getLanguageDescription(language_tag)
-        self.progress_dialog = None
-
-    def update_progress(self, progress):
-        self.progress_dialog.Update(
-            progress,
-            # Translators: message of a progress dialog
-            _("Downloaded: {progress}%").format(progress=progress),
-        )
-
-    def done_callback(self, exception):
-        self.progress_dialog.Hide()
-        self.progress_dialog.Destroy()
-        del self.progress_dialog
-        if exception is None:
-            wx.CallAfter(
-                gui.messageBox,
-                _("Successfully downloaded dictionary for  language {lang}").format(
-                    lang=self.language_description
-                ),
-                _("Dictionary Downloaded"),
-                style=wx.ICON_INFORMATION,
-            )
-        else:
-            wx.CallAfter(
-                gui.messageBox,
-                _(
-                    "Cannot download dictionary for language {lang}.\nPlease check your connection and try again."
-                ).format(lang=self.language_description),
-                _("Download Failed"),
-                style=wx.ICON_ERROR,
-            )
-            log.exception(
-                f"Failed to download language dictionary.\nException: {exception}"
-            )
-
-    def download(self):
-        if self.ask_user:
-            retval = gui.messageBox(
-                _(
-                    "Dictionary for language {lang} is missing.\nWould you like to download it?"
-                ).format(lang=self.language_description),
-                _("Download Language Dictionary"),
-                style=wx.YES | wx.NO | wx.ICON_ASTERISK,
-                parent=gui.mainFrame,
-            )
-            if retval == wx.NO:
-                return
-        self.progress_dialog = wx.ProgressDialog(
-            # Translators: title of a progress dialog
-            title=_("Downloading Dictionary For Language {lang}").format(
-                lang=self.language_description
-            ),
-            # Translators: message of a progress dialog
-            message=_("Retrieving download information..."),
-            parent=gui.mainFrame,
-        )
-        self.progress_dialog.CenterOnScreen()
-        download_language_dictionary(
-            self.language_tag, self.update_progress, self.done_callback
-        )
+# Ensure '_' is available for translations even in static analysis.
+try:
+    _  # type: ignore[name-defined]
+except NameError:  # pragma: no cover
+    import gettext as _gettext
+    _ = _gettext.gettext
 
 
 class GlobalPlugin(globalPluginHandler.GlobalPlugin):
@@ -134,6 +48,17 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
         super().__init__(*args, **kwargs)
         set_enchant_language_dictionaries_directory()
         self._active_spellcheck_language = None
+        # Add menu item under Tools after GUI is ready
+        wx.CallAfter(self._addToolsMenu)
+
+    def _addToolsMenu(self):
+        try:
+            toolsMenu = gui.mainFrame.sysTrayIcon.toolsMenu
+            self._settingsMenuItem = toolsMenu.Append(wx.ID_ANY, _("Spellcheck settings"))
+            gui.mainFrame.sysTrayIcon.Bind(wx.EVT_MENU, self.onOpenSettings, self._settingsMenuItem)
+        except Exception:
+            # Log for diagnostics but avoid crashing the plugin
+            log.exception("Failed to add Spellcheck settings to Tools menu")
 
     def on_language_variance_download(self, lang_tag):
         wx.CallAfter(LanguageDictionaryDownloader(lang_tag, ask_user=False).download)
@@ -142,11 +67,24 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
         self._active_spellcheck_language = lang_tag
         self.obtain_language_dictionary(lang_tag)
 
+    def onOpenSettings(self, evt=None):
+        dlg = SpellcheckSettingsDialog()
+        gui.runScriptModalDialog(dlg)
+
+    @script(
+        gesture="kb:nvda+alt+shift+s",
+        # translators: appears in the NVDA input help.
+        description=_("Opens the Spellcheck settings dialog"),
+        category=SCRCAT__SPELLCHECK,
+    )
+    def script_open_spellcheck_settings(self, gesture):
+        self.onOpenSettings()
+
     @script(
         gesture="kb:nvda+alt+s",
         # translators: appears in the NVDA input help.
-        description=_(
-            "Checks spelling errors for the selected text using the current input language"
+        description=(
+            _("Checks spelling errors for the selected text using the current input language")
         ),
         category=SCRCAT__SPELLCHECK,
     )
@@ -165,8 +103,10 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
     @script(
         gesture="kb:nvda+alt+shift+l",
         # translators: appears in the NVDA input help.
-        description=_(
-            "Toggles the method used in determining the language for spellchecking: user-chosen versus current input language"
+        description=(
+            _(
+                "Toggles the method used in determining the language for spellchecking: user-chosen versus current input language"
+            )
         ),
         category=SCRCAT__SPELLCHECK,
     )

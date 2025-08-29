@@ -48,6 +48,20 @@ Evet'e tıkladığınızda, sözlük yüklenecek ve varsayılan klavye dilinde d
 Ek olarak, bir dili manuel olarak seçebileceğiniz ve daha önce indirilmemişse sözlüğü indirebileceğiniz veya o dilde yazım denetimi yapabileceğiniz dillerin listesini getirmek için NVDA+ALT+SHIFT+L tuşlarına basabilirsiniz.  
 Varsayılan klavye diline dönmek için aynı kısa yol tuşlarına tekrar basabilirsiniz.  
 
+### Sözlük yönetimi (Ayarlar)
+
+Araçlar → Yazım Denetimi ayarları’ndan açın veya NVDA+Alt+Shift+S tuşlarına basın.
+
+- Neler yapabilirsiniz?
+	- Yüklü olmayan sözlükleri yükleyin.
+	- Güncelleme varsa yüklü sözlükleri güncelleyin.
+	- Artık gerek duymadığınız sözlükleri silin.
+	- Listeyi filtreleyin: Tümü, Yüklü, Yüklü değil, Güncellemesi var.
+	- Her dil için basit bir durum gösterilir: “Yüklü — Güncel — 7.0 MB”, “Yüklü — Güncelleme var — 7.0 MB” veya “Yüklü değil — 7.0 MB”.
+- Notlar:
+	- Güncelleme denetimleri arka planda çalışır; arayüz akıcı kalır.
+	- Boyutlar MB cinsinden gösterilir.
+
 ## Notlar
 
 - Escape tuşuna basarsanız, yapılan deyişiklikler kaydedilmeden pencereden çıkılacaktır.  
@@ -68,5 +82,6 @@ Varsayılan klavye diline dönmek için aynı kısa yol tuşlarına tekrar basab
 - Control+Shift+P: odaktaki yanlış yazım veya öneriyi harf harf okur. (Giriş hareketlerinden değiştirilebilir).  
 - Escape: Hem öneriler menüsünü hem de yanlış yazılmış sözcükler menüsünü kapatır.  
 - NVDA+Alt+SHIFT+L: Farklı diller seçebileceğimiz bir liste açar. (giriş hareketlerinden değiştirilebilir).  
+- NVDA+Alt+Shift+S: Yazım Denetimi ayarlarını açar (sözlük yönetimi).
 
   
