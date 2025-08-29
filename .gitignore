@@ -12,3 +12,50 @@ addon/doc/en/
 # pip related stuff
 Pipfile
 Pipfile.lock
+
+# Python caches and build artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.eggs/
+build/
+dist/
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.nox/
+.tox/
+.cache/
+__pypackages__/
+
+# Virtual environments and tooling
+.venv/
+venv*/
+.python-version
+.env
+.env.*
+
+# Editors/IDEs
+.vscode/
+.idea/
+.vs/
+
+# OS junk files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs and temp files
+*.log
+*.tmp
+*.bak
+~$*
+
+# SCons misc
+.sconsign*
