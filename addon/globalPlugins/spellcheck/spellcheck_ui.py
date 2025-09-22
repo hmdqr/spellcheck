@@ -33,7 +33,7 @@ with import_bundled_library():
 # It prevent any key strokes from reaching the application
 # Thereby avoiding any unintentional edits to the underlying text control
 CAPTURE_KEYS_WHILE_IN_FOCUS = True
-PASTE_GESTURE = KeyboardInputGesture.fromName("control+v")
+# Defer creation of paste gesture until runtime to avoid layout issues during import
 
 
 import addonHandler
@@ -487,7 +487,13 @@ class SpellCheckMenu(MenuObject):
             queueHandler.queueFunction(
                 queueHandler.eventQueue, api.setFocusObject, self.parent
             )
-            queueHandler.queueFunction(queueHandler.eventQueue, PASTE_GESTURE.send)
+            # Create and send the paste gesture at runtime; avoids layout-dependent errors at import time
+            def _do_paste():
+                try:
+                    KeyboardInputGesture.fromName("control+v").send()
+                except Exception:
+                    ui.message(_("Could not send paste gesture; please press Control+V to paste"))
+            queueHandler.queueFunction(queueHandler.eventQueue, _do_paste)
             queueHandler.queueFunction(
                 queueHandler.eventQueue,
                 play_sound,
