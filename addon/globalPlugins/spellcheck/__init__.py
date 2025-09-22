@@ -72,7 +72,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
         gui.runScriptModalDialog(dlg)
 
     @script(
-        gesture="kb:nvda+alt+shift+s",
+        gesture="kb:nvda+alt+control+s",
         # translators: appears in the NVDA input help.
         description=_("Opens the Spellcheck settings dialog"),
         category=SCRCAT__SPELLCHECK,
@@ -81,7 +81,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
         self.onOpenSettings()
 
     @script(
-        gesture="kb:nvda+alt+s",
+        gesture="kb:nvda+alt+shift+s",
         # translators: appears in the NVDA input help.
         description=(
             _("Checks spelling errors for the selected text using the current input language")

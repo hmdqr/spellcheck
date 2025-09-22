@@ -15,7 +15,7 @@ Ayrıca, Sözlükte bulunmayan kelimeleri ekleyebileceğiniz kişisel bir kelime
 ## Kullanım:  
 
 - Denetlemek istediğiniz metnin tümünü CTRL+A ile seçmeli veya dilediğiniz bir kısmını diğer seçme yöntemleri ile seçmelisiniz.  
-- Eklenti arayüzünü çağırmak için NVDA+Alt+S tuşlarına basın.  
+- Eklenti arayüzünü çağırmak için NVDA+Alt+Shift+S tuşlarına basın.  
 - Yazım denetimi varsayılan yazma dilinize göre yapılacaktır.  
 - Alternatif olarak, NVDA+ALT+SHIFT+L tuşlarına basarak açılacak listeden dilediğiniz dili seçebilirsiniz.  
 - hata yoksa yazım hatası olmadığını belirten bir mesaj duyurusu yapılır.  
@@ -50,7 +50,7 @@ Varsayılan klavye diline dönmek için aynı kısa yol tuşlarına tekrar basab
 
 ### Sözlük yönetimi (Ayarlar)
 
-Araçlar → Yazım Denetimi ayarları’ndan açın veya NVDA+Alt+Shift+S tuşlarına basın.
+Araçlar → Yazım Denetimi ayarları’ndan açın veya NVDA+Alt+Control+S tuşlarına basın.
 
 - Neler yapabilirsiniz?
 	- Yüklü olmayan sözlükleri yükleyin.
@@ -66,12 +66,12 @@ Araçlar → Yazım Denetimi ayarları’ndan açın veya NVDA+Alt+Shift+S tuşl
 
 - Escape tuşuna basarsanız, yapılan deyişiklikler kaydedilmeden pencereden çıkılacaktır.  
 - Herhangi bir metni değiştirmeden sadece kişisel sözlüğe kelime eklemek isteseniz bile, bu kelimelerin kişisel sözlüğe eklenmesi için Control+R tuşlarına basmanız gerekir.  
-- Yazım denetleme kısa yolu olan (NVDA+alt+s), Kaydetme kısayol tuşu (kontrol+r) ve manuel dil seçim kısayol tuşu olan (NVDA+Alt+SHIFT+L) seçeneklerini Girdi hreketleri iletişim kutusundan değiştirebilirsiniz.  
+- Yazım denetleme kısa yolu olan (NVDA+Alt+Shift+S), Kaydetme kısayol tuşu (kontrol+r) ve manuel dil seçim kısayol tuşu olan (NVDA+Alt+SHIFT+L) seçeneklerini Girdi hreketleri iletişim kutusundan değiştirebilirsiniz.  
 
 
 ## Klavye kısayolları
 
-- NVDA+alt+s: Eklentiyi etkinleştirir. (Giriş hareketlerinden değiştirilebilir).  
+- NVDA+Alt+Shift+S: Eklentiyi etkinleştirir. (Giriş hareketlerinden değiştirilebilir).  
 -Sağ ve Sol yön tuşları: Bulunan Yazım hataları arasında dolaşmamızı sağlar.  
 - Enter veya Aşağı yön tuşu: Öneri listesini açar.  
 - Yukarı ve aşağı yön tuşu: öneriler arasında gezinmemizi sağlar.  
@@ -82,7 +82,7 @@ Araçlar → Yazım Denetimi ayarları’ndan açın veya NVDA+Alt+Shift+S tuşl
 - Control+Shift+P: odaktaki yanlış yazım veya öneriyi harf harf okur. (Giriş hareketlerinden değiştirilebilir).  
 - Escape: Hem öneriler menüsünü hem de yanlış yazılmış sözcükler menüsünü kapatır.  
 - NVDA+Alt+SHIFT+L: Farklı diller seçebileceğimiz bir liste açar. (giriş hareketlerinden değiştirilebilir).  
-- NVDA+Alt+Shift+S: Yazım Denetimi ayarlarını açar (sözlük yönetimi).
+- NVDA+Alt+Control+S: Yazım Denetimi ayarlarını açar (sözlük yönetimi).
 
 ## Kullanılan bileşenler ve sözlük kaynağı
 
